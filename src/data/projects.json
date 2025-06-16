@@ -1,0 +1,9 @@
+[
+  {
+    "title": "Example Project",
+    "description": "This is a sample project. Replace this with your own.",
+    "tags": ["React", "TailwindCSS"],
+    "image": "/images/sample.png",
+    "link": "https://example.com"
+  }
+]
