@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Town Of Re-Worked: Launchpad (TOR-W: L)",
+    "description": "An Among Us mod with custom roles and options.",
+    "image": "/images/torwl.png",
+    "link": "https://github.com/TownofReworked/TORWLaunchpad",
+    "tags": ["Among Us", "Mod", "C#"]
+  },
+  {
+    "title": "TOR-W Bot",
+    "description": "A Discord bot with welcome systems, minigames, and many more.",
+    "image": "/images/torw-bot.png",
+    "link": "https://discord.com/oauth2/authorize?client_id=1345729546476982343&permissions=8&integration_type=0&scope=bot+applications.commands",
+    "type": "bot",
+    "tags": ["Discord", "Python", "Bot"]
+  },
+  {
+    "title": "Events Bot",
+    "description": "A Fun Discord bot used for catching items (reactions) and competing against the fellow server members.",
+    "image": "/images/eventsbot.png",
+    "link": "https://discord.com/oauth2/authorize?client_id=1297176728128589874&permissions=8&integration_type=0&scope=bot+applications.commands",
+    "type": "bot",
+    "tags": ["Discord", "Python", "Bot"]
+  },
+  {
+    "title": "TOR-W Website",
+    "description": "The website for the TOR-W: L mod which contains all the information for the mod.",
+    "image": "/images/website.png",
+    "link": "https://torw-official.netlify.app/",
+    "github": "https://github.com/andries659/test-website",
+    "type": "website",
+    "tags": ["Website", "TailwindCSS", "React Router"]
+  }
+]
