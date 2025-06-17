@@ -70,7 +70,7 @@ export default function Portfolio() {
       {/* Profile Image + Text */}
       <div className="flex justify-center items-center gap-4 pt-6">
         <img
-          src="/your-profile-image.png"
+          src="/download.jpeg"
           alt="Profile"
           onClick={() => setClickCount((prev) => prev + 1)}
           className="w-24 h-24 rounded-full cursor-pointer transition-transform hover:scale-110 border-4 border-blue-400 dark:border-blue-600"
