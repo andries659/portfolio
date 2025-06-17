@@ -78,7 +78,8 @@ export default function Portfolio() {
         <div className="text-center text-xl font-semibold text-gray-800 dark:text-white">
           Welcome to My Portfolio
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            Click the avatar 5 times to activate Retro Mode 👾
+            The avatar to the left is my Discord avatar. Feel free to reach out to me in Discord any time.<br />
+            I've also added a special easter egg, if you find it, you're lucky, I can't even do it myself!
           </p>
         </div>
       </div>
