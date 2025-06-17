@@ -13,7 +13,7 @@ function App() {
       </header>
 
       {/* Padding added here */}
-      <main className="px-4 pt-20 pb-10">
+      <main>
         <Portfolio />
       </main>
     </div>
