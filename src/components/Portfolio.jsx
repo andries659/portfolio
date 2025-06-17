@@ -84,7 +84,7 @@ export default function Portfolio() {
       <audio ref={audioRef} src="/retro-sound.wav" preload="auto" />
 
       {/* Main Content */}
-      <div className="pt-20">
+      <div>
         {/* Profile Section */}
         <div className="flex justify-center items-center gap-4 mb-4">
           <img
