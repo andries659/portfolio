@@ -2,3 +2,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.retro {
+  font-family: 'Press Start 2P', cursive !important;
+  background-color: #1a1a1a !important;
+  color: #00ffff !important;
+}
+
+.retro a {
+  color: #ffff00 !important;
+}
+
+.retro * {
+  border-radius: 0 !important;
+  image-rendering: pixelated !important;
+  transition: none !important;
+}
