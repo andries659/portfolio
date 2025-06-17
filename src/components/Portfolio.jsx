@@ -84,10 +84,9 @@ export default function Portfolio() {
       <audio ref={audioRef} src="/retro-sound.wav" preload="auto" />
 
       {/* Main Content */}
-      <div className="pt-28"> {/* Extra padding below navbar */}
-
+      <div className="pt-20">
         {/* Profile Section */}
-        <div className="flex justify-center items-center gap-4 mb-6">
+        <div className="flex justify-center items-center gap-4 mb-4">
           <img
             src="/images/download.jpeg"
             alt="Profile"
@@ -104,7 +103,7 @@ export default function Portfolio() {
         </div>
 
         {/* Search Bar */}
-        <div className="px-4 pb-6">
+        <div className="px-4 pb-4">
           <input
             type="text"
             placeholder="Search projects..."
@@ -130,12 +129,8 @@ export default function Portfolio() {
                 alt={project.title}
                 className="rounded-lg w-full h-40 object-cover mb-4"
               />
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
-                {project.title}
-              </h2>
-              <p className="text-gray-600 dark:text-gray-300 mb-2">
-                {project.description}
-              </p>
+              <h2 className="text-xl font-semibold text-gray-800 dark:text-white">{project.title}</h2>
+              <p className="text-gray-600 dark:text-gray-300 mb-2">{project.description}</p>
               <div className="flex flex-wrap gap-2 mb-3">
                 {project.tags.map((tag, tagIndex) => (
                   <span
