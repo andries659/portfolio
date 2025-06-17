@@ -41,7 +41,7 @@ export default function Portfolio() {
       <div className="p-4 pt-6">
         <input
           type="text"
-          placeholder="Search projects..."
+          placeholder="🔎 Search projects... 🔎"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full p-3 text-base rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600"
