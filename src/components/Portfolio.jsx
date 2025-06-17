@@ -2,19 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import projects from '../projects.json';
 
-const getLinkLabel = (type) => {
-  switch (type) {
-    case 'bot':
-      return 'Invite Bot';
-    case 'website':
-      return 'Website';
-    case 'mod':
-      return 'View Mod';
-    default:
-      return 'View Project';
-  }
-};
-
 export default function Portfolio() {
   const { scrollYProgress } = useScroll();
 
@@ -22,20 +9,27 @@ export default function Portfolio() {
   const [clickCount, setClickCount] = useState(0);
   const [retroActive, setRetroActive] = useState(false);
   const [showToast, setShowToast] = useState(false);
+  const [darkMode, setDarkMode] = useState(() =>
+    localStorage.getItem('theme') === 'dark' ||
+    (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)
+  );
   const audioRef = useRef(null);
 
-  // Handle Easter Egg Activation
+  // Apply saved theme on load
+  useEffect(() => {
+    document.documentElement.classList.toggle('dark', darkMode);
+    localStorage.setItem('theme', darkMode ? 'dark' : 'light');
+  }, [darkMode]);
+
+  // Retro mode activation
   useEffect(() => {
     if (clickCount >= 5) {
       document.documentElement.classList.toggle('retro');
       setRetroActive(!retroActive);
       setClickCount(0);
 
-      // Show toast and play sound
       setShowToast(true);
       if (audioRef.current) audioRef.current.play();
-
-      // Hide toast after 3s
       setTimeout(() => setShowToast(false), 3000);
     }
   }, [clickCount]);
@@ -49,6 +43,19 @@ export default function Portfolio() {
     );
   });
 
+  const getLinkLabel = (type) => {
+    switch (type) {
+      case 'bot':
+        return 'Invite Bot';
+      case 'website':
+        return 'Website';
+      case 'mod':
+        return 'View Mod';
+      default:
+        return 'View Project';
+    }
+  };
+
   return (
     <>
       {/* Scroll Progress Bar */}
@@ -57,6 +64,17 @@ export default function Portfolio() {
         style={{ scaleX: scrollYProgress }}
       />
 
+      {/* Light/Dark Toggle Nav Bar */}
+      <nav className="w-full fixed top-0 z-40 flex justify-between items-center px-4 py-3 bg-white dark:bg-gray-900 shadow border-b border-gray-200 dark:border-gray-700">
+        <h1 className="text-xl font-bold text-gray-800 dark:text-white">My Portfolio</h1>
+        <button
+          onClick={() => setDarkMode(!darkMode)}
+          className="bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white px-3 py-1.5 rounded-full transition hover:scale-105"
+        >
+          {darkMode ? '🌞 Light Mode' : '🌙 Dark Mode'}
+        </button>
+      </nav>
+
       {/* Toast Notification */}
       {showToast && (
         <div className="fixed top-16 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-6 py-3 rounded-xl shadow-lg z-50 font-mono text-sm">
@@ -64,22 +82,21 @@ export default function Portfolio() {
         </div>
       )}
 
-      {/* Retro Sound Effect */}
+      {/* Retro Sound */}
       <audio ref={audioRef} src="/retro-sound.wav" preload="auto" />
 
-      {/* Profile Image + Text */}
-      <div className="flex justify-center items-center gap-4 pt-6">
+      {/* Profile Image + Label */}
+      <div className="flex justify-center items-center gap-4 pt-24">
         <img
-          src="/images/download.jpeg"
+          src="/images/download.jpeg" // replace with your image path
           alt="Profile"
           onClick={() => setClickCount((prev) => prev + 1)}
-          className="w-24 h-24 rounded-full cursor-pointer transition-transform hover:scale-110 border-4 border-blue-400 dark:border-blue-600"
+          className="w-32 h-32 object-cover rounded-full cursor-pointer transition-transform hover:scale-110 border-4 border-blue-400 dark:border-blue-600"
         />
         <div className="text-center text-xl font-semibold text-gray-800 dark:text-white">
           Welcome to My Portfolio
           <p className="text-sm text-gray-500 dark:text-gray-400">
-            The avatar to the left is my Discord avatar. Feel free to reach out to me in Discord any time.<br />
-            I've also added a special easter egg, if you find it, you're lucky, I can't even do it myself!
+            Click the avatar 5 times to activate Retro Mode 👾
           </p>
         </div>
       </div>
