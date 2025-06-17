@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import projects from '../projects.json';
 
@@ -17,9 +17,19 @@ const getLinkLabel = (type) => {
 
 export default function Portfolio() {
   const { scrollYProgress } = useScroll();
-  const [search, setSearch] = useState('');
 
-  // Filter projects based on title, description, or tags
+  const [search, setSearch] = useState('');
+  const [clickCount, setClickCount] = useState(0);
+  const [retroActive, setRetroActive] = useState(false);
+
+  useEffect(() => {
+    if (clickCount >= 5) {
+      document.documentElement.classList.toggle('retro');
+      setRetroActive(!retroActive);
+      setClickCount(0);
+    }
+  }, [clickCount]);
+
   const filteredProjects = projects.filter((project) => {
     const searchText = search.toLowerCase();
     return (
@@ -31,24 +41,34 @@ export default function Portfolio() {
 
   return (
     <>
-      {/* Scroll progress bar */}
+      {/* Scroll Progress Bar */}
       <motion.div
         className="fixed top-0 left-0 right-0 h-1 bg-blue-500 z-50 origin-left"
         style={{ scaleX: scrollYProgress }}
       />
 
-      {/* Search input */}
+      {/* Profile Image Easter Egg */}
+      <div className="flex justify-center pt-6">
+        <img
+          src="/images/download.jpeg" // Replace with your image path
+          alt="Profile"
+          onClick={() => setClickCount((prev) => prev + 1)}
+          className="w-24 h-24 rounded-full cursor-pointer transition-transform hover:scale-110 border-4 border-blue-400 dark:border-blue-600"
+        />
+      </div>
+
+      {/* Search Bar */}
       <div className="p-4 pt-6">
         <input
           type="text"
-          placeholder="🔎 Search projects... 🔎"
+          placeholder="Search projects..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full p-3 text-base rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-white dark:border-gray-600"
         />
       </div>
 
-      {/* Projects grid */}
+      {/* Project Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
         {filteredProjects.map((project, index) => (
           <motion.div
