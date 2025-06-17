@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import projects from '../projects.json';
 
@@ -21,12 +21,22 @@ export default function Portfolio() {
   const [search, setSearch] = useState('');
   const [clickCount, setClickCount] = useState(0);
   const [retroActive, setRetroActive] = useState(false);
+  const [showToast, setShowToast] = useState(false);
+  const audioRef = useRef(null);
 
+  // Handle Easter Egg Activation
   useEffect(() => {
     if (clickCount >= 5) {
       document.documentElement.classList.toggle('retro');
       setRetroActive(!retroActive);
       setClickCount(0);
+
+      // Show toast and play sound
+      setShowToast(true);
+      if (audioRef.current) audioRef.current.play();
+
+      // Hide toast after 3s
+      setTimeout(() => setShowToast(false), 3000);
     }
   }, [clickCount]);
 
@@ -47,14 +57,30 @@ export default function Portfolio() {
         style={{ scaleX: scrollYProgress }}
       />
 
-      {/* Profile Image Easter Egg */}
-      <div className="flex justify-center pt-6">
+      {/* Toast Notification */}
+      {showToast && (
+        <div className="fixed top-16 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-6 py-3 rounded-xl shadow-lg z-50 font-mono text-sm">
+          🕹️ Retro Mode {retroActive ? 'Activated' : 'Deactivated'}!
+        </div>
+      )}
+
+      {/* Retro Sound Effect */}
+      <audio ref={audioRef} src="/retro-sound.wav" preload="auto" />
+
+      {/* Profile Image + Text */}
+      <div className="flex justify-center items-center gap-4 pt-6">
         <img
-          src="/images/download.jpeg" // Replace with your image path
+          src="/your-profile-image.png"
           alt="Profile"
           onClick={() => setClickCount((prev) => prev + 1)}
           className="w-24 h-24 rounded-full cursor-pointer transition-transform hover:scale-110 border-4 border-blue-400 dark:border-blue-600"
         />
+        <div className="text-center text-xl font-semibold text-gray-800 dark:text-white">
+          Welcome to My Portfolio
+          <p className="text-sm text-gray-500 dark:text-gray-400">
+            Click the avatar 5 times to activate Retro Mode 👾
+          </p>
+        </div>
       </div>
 
       {/* Search Bar */}
