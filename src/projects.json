@@ -3,7 +3,7 @@
     "title": "Town Of Re-Worked: Launchpad (TOR-W: L)",
     "description": "An Among Us mod with custom roles and options.",
     "image": "/images/torwl.png",
-    "link": "https://github.com/TownofReworked/TORWLaunchpad",
+    "github": "https://github.com/TownofReworked/TORWLaunchpad",
     "tags": ["Among Us", "Mod", "C#"]
   },
   {
@@ -27,7 +27,6 @@
     "description": "The website for the TOR-W: L mod which contains all the information for the mod.",
     "image": "/images/website.png",
     "link": "https://torw-official.netlify.app/",
-    "github": "https://github.com/andries659/test-website",
     "type": "website",
     "tags": ["Website", "TailwindCSS", "React Router"]
   }
