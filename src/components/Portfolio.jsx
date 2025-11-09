@@ -167,7 +167,7 @@ export default function Portfolio() {
                     href={project.download}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-500 hover:text-black dark:hover:text-white"
+                    className="text-purple-400 hover:underline"
                   >
                     Download
                   </a>
