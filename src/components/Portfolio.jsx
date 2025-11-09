@@ -49,6 +49,8 @@ export default function Portfolio() {
         return 'Website';
       case 'mod':
         return 'View Mod';
+      case 'download':
+        return 'Download';
       default:
         return 'View Project';
     }
