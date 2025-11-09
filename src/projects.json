@@ -15,19 +15,11 @@
     "tags": ["Discord", "Python", "Bot"]
   },
   {
-    "title": "Events Bot",
-    "description": "A Fun Discord bot used for catching items (reactions) and competing against the fellow server members.",
-    "image": "/images/eventsbot.png",
-    "link": "https://discord.com/oauth2/authorize?client_id=1297176728128589874&permissions=8&integration_type=0&scope=bot+applications.commands",
-    "type": "bot",
-    "tags": ["Discord", "Python", "Bot"]
-  },
-  {
     "title": "TOR-W Website",
     "description": "The website for the TOR-W: L mod which contains all the information for the mod.",
     "image": "/images/website.png",
-    "link": "https://torw-official.netlify.app/",
+    "link": "https://torw-l.vercel.app/",
     "type": "website",
-    "tags": ["Website", "TailwindCSS", "React Router"]
+    "tags": ["Website", "TailwindCSS", "Next.js"]
   }
 ]
