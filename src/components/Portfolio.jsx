@@ -49,8 +49,6 @@ export default function Portfolio() {
         return 'Website';
       case 'mod':
         return 'View Mod';
-      case 'download':
-        return 'Download';
       default:
         return 'View Project';
     }
@@ -162,6 +160,16 @@ export default function Portfolio() {
                     className="text-gray-500 hover:text-black dark:hover:text-white"
                   >
                     GitHub
+                  </a>
+                )}
+                {project.download && (
+                  <a
+                    href={project.download}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-500 hover:text-black dark:hover:text-white"
+                  >
+                    Download
                   </a>
                 )}
               </div>
