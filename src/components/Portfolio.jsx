@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useScroll } from 'framer-motion';
 import projects from '../projects.json';
 
@@ -6,31 +6,15 @@ export default function Portfolio() {
   const { scrollYProgress } = useScroll();
 
   const [search, setSearch] = useState('');
-  const [clickCount, setClickCount] = useState(0);
-  const [retroActive, setRetroActive] = useState(false);
-  const [showToast, setShowToast] = useState(false);
   const [darkMode, setDarkMode] = useState(() =>
     localStorage.getItem('theme') === 'dark' ||
     (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)
   );
-  const audioRef = useRef(null);
 
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
     localStorage.setItem('theme', darkMode ? 'dark' : 'light');
   }, [darkMode]);
-
-  useEffect(() => {
-    if (clickCount >= 5) {
-      document.documentElement.classList.toggle('retro');
-      setRetroActive(!retroActive);
-      setClickCount(0);
-
-      setShowToast(true);
-      if (audioRef.current) audioRef.current.play();
-      setTimeout(() => setShowToast(false), 3000);
-    }
-  }, [clickCount]);
 
   const filteredProjects = projects.filter((project) => {
     const searchText = search.toLowerCase();
@@ -73,35 +57,8 @@ export default function Portfolio() {
         </button>
       </nav>
 
-      {/* Toast */}
-      {showToast && (
-        <div className="fixed top-16 left-1/2 transform -translate-x-1/2 bg-yellow-400 text-black px-6 py-3 rounded-xl shadow-lg z-50 font-mono text-sm">
-          🕹️ Retro Mode {retroActive ? 'Activated' : 'Deactivated'}!
-        </div>
-      )}
-
-      {/* Retro Sound */}
-      <audio ref={audioRef} src="/retro-sound.wav" preload="auto" />
-
       {/* Main Content */}
-      <div>
-        {/* Profile Section */}
-        <div className="flex justify-center items-center gap-4 mb-4">
-          <img
-            src="/images/download.jpeg"
-            alt="Profile"
-            onClick={() => setClickCount((prev) => prev + 1)}
-            className="w-24 h-24 object-cover rounded-full cursor-pointer transition-transform hover:scale-110 border-4 border-blue-400 dark:border-blue-600"
-          />
-          <div className="text-center text-xl font-semibold text-gray-800 dark:text-white">
-            Welcome to My Portfolio
-            <p className="text-sm text-gray-500 dark:text-gray-400">
-              The avatar to the left is my Discord avatar. Feel free to reach out to me in Discord any time.<br />
-              I've also added a special easter egg, if you find it, you're lucky, I can't even do it myself!
-            </p>
-          </div>
-        </div>
-
+      <div className="pt-24">
         {/* Search Bar */}
         <div className="px-4 pb-4">
           <input
