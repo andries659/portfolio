@@ -2,7 +2,6 @@
   {
     "title": "Town Of Re-Worked: Launchpad (TOR-W: L)",
     "description": "An Among Us mod with custom roles and options.",
-    "image": "/images/torwl.png",
     "github": "https://github.com/TownofReworked/TORWLaunchpad",
     "download": "https://github.com/TownofReworked/TORWLaunchpad/releases/latest",
     "type": "mod",
@@ -11,7 +10,6 @@
   {
     "title": "TOR-W Bot",
     "description": "A Discord bot with welcome systems, minigames, and many more.",
-    "image": "/images/torw-bot.png",
     "link": "https://discord.com/oauth2/authorize?client_id=1345729546476982343&permissions=8&integration_type=0&scope=bot+applications.commands",
     "type": "bot",
     "tags": ["Discord", "Python", "Bot"]
@@ -19,9 +17,29 @@
   {
     "title": "TOR-W Website",
     "description": "The website for the TOR-W: L mod which contains all the information for the mod.",
-    "image": "/images/website.png",
     "link": "https://torw-l.vercel.app/",
     "type": "website",
     "tags": ["Website", "TailwindCSS", "Next.js"]
+  },
+  {
+    "title": "Mafia Web Game",
+    "description": "A website verion of \"Mafia: Remastered\" bot game on Discord.",
+    "link": "https://mafia-web-game.vercel.app",
+    "type": "website",
+    "tags": ["Website", "TailwindCSS", "Vite"]
+  },
+  {
+    "title": "TOR-W:L Wiki",
+    "description": "A wiki thats a WIP for the TOR-W:L Among Us mod.",
+    "link": "https://townofreworked.github.io/docs.torwl.gg/",
+    "type": "website",
+    "tags": ["Website", "Docosaurus"]
+  },
+  {
+    "title": "Among Us Detective Board",
+    "description": "The official detective board for the players of the AMong Us mod TOR-W:L.",
+    "link": "https://townofreworked.github.io/modded-detective-board/",
+    "type": "website",
+    "tags": ["Website", "HTML & CSS"]
   }
 ]
