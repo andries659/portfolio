@@ -30,7 +30,7 @@
   },
   {
     "title": "TOR-W:L Wiki",
-    "description": "A wiki thats a WIP for the TOR-W:L Among Us mod.",
+    "description": "A wiki that's a WIP for the TOR-W:L Among Us mod.",
     "link": "https://townofreworked.github.io/docs.torwl.gg/",
     "type": "website",
     "tags": ["Website", "Docosaurus"]
