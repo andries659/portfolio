@@ -29,13 +29,6 @@
     "tags": ["Website", "TailwindCSS", "Vite"]
   },
   {
-    "title": "TOR-W:L Wiki",
-    "description": "A wiki that's a WIP for the TOR-W:L Among Us mod.",
-    "link": "https://townofreworked.github.io/docs.torwl.gg/",
-    "type": "website",
-    "tags": ["Website", "Docosaurus"]
-  },
-  {
     "title": "Among Us Detective Board",
     "description": "The official detective board for the players of the AMong Us mod TOR-W:L.",
     "link": "https://townofreworked.github.io/modded-detective-board/",
