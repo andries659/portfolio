@@ -1,16 +1,50 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Portfolio from './components/Portfolio';
 
 function App() {
   const canvasRef = useRef(null);
 
-  // Animated starfield / particle grid background
+  // ===== State =====
+  const [time, setTime] = useState('');
+  const [displayText, setDisplayText] = useState('');
+  const [theme, setTheme] = useState('green');
+
+  const fullText = ".angel24.";
+
+  // ===== Live Clock =====
+  useEffect(() => {
+    const updateTime = () => {
+      const now = new Date();
+      setTime(
+        now.toLocaleTimeString('en-GB', { hour12: false })
+      );
+    };
+
+    updateTime();
+    const interval = setInterval(updateTime, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // ===== Typing Effect =====
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      setDisplayText(fullText.slice(0, i + 1));
+      i++;
+      if (i === fullText.length) clearInterval(interval);
+    }, 80);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // ===== Star Background =====
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
+
     const ctx = canvas.getContext('2d');
-    let width = (canvas.width = window.innerWidth);
-    let height = (canvas.height = window.innerHeight);
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
     let animId;
 
     const stars = Array.from({ length: 120 }, () => ({
@@ -23,40 +57,48 @@ function App() {
 
     function draw() {
       ctx.clearRect(0, 0, width, height);
+
       stars.forEach((s) => {
         s.y += s.speed;
-        if (s.y > height) { s.y = 0; s.x = Math.random() * width; }
+        if (s.y > height) {
+          s.y = 0;
+          s.x = Math.random() * width;
+        }
+
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(120, 220, 180, ${s.opacity * 0.6})`;
         ctx.fill();
       });
+
       animId = requestAnimationFrame(draw);
     }
+
     draw();
 
     const onResize = () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     };
+
     window.addEventListener('resize', onResize);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener('resize', onResize); };
+    return () => {
+      cancelAnimationFrame(animId);
+      window.removeEventListener('resize', onResize);
+    };
   }, []);
 
   return (
     <>
-      {/* Global styles injected via style tag */}
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Space+Mono&family=Syne:wght@400;600;800&display=swap');
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
           background: #050d0a;
           color: #e0ffe8;
           font-family: 'Syne', sans-serif;
-          min-height: 100vh;
-          overflow-x: hidden;
         }
 
         .app-root {
@@ -64,20 +106,21 @@ function App() {
           position: relative;
         }
 
+        .app-root.purple {
+          background: #0a0510;
+          color: #f3e8ff;
+        }
+
         .bg-canvas {
           position: fixed;
           inset: 0;
-          z-index: 0;
-          pointer-events: none;
           opacity: 0.5;
+          pointer-events: none;
         }
 
-        /* Scanline overlay */
         .scanlines {
           position: fixed;
           inset: 0;
-          z-index: 1;
-          pointer-events: none;
           background: repeating-linear-gradient(
             to bottom,
             transparent,
@@ -87,14 +130,10 @@ function App() {
           );
         }
 
-        /* Green glow vignette */
         .vignette {
           position: fixed;
           inset: 0;
-          z-index: 1;
-          pointer-events: none;
-          background: radial-gradient(ellipse at 50% 0%, rgba(40,255,120,0.07) 0%, transparent 65%),
-                      radial-gradient(ellipse at 50% 100%, rgba(20,180,80,0.05) 0%, transparent 60%);
+          background: radial-gradient(circle at top, rgba(40,255,120,0.1), transparent);
         }
 
         .content {
@@ -102,140 +141,128 @@ function App() {
           z-index: 2;
         }
 
-        /* Header */
         .header {
-          padding: 3rem 2rem 3rem;
+          padding: 3rem 2rem;
           max-width: 900px;
-          margin: 0 auto;
-          text-align: left;
-        }
-
-        .header-eyebrow {
-          font-family: 'Space Mono', monospace;
-          font-size: 0.72rem;
-          letter-spacing: 0.25em;
-          color: #3dffa0;
-          text-transform: uppercase;
-          margin-bottom: 1.4rem;
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-        }
-
-        .header-eyebrow::before {
-          content: '';
-          display: inline-block;
-          width: 2.5rem;
-          height: 1px;
-          background: #3dffa0;
+          margin: auto;
         }
 
         .header-title {
-          font-family: 'Syne', sans-serif;
+          font-size: clamp(3rem, 6vw, 5rem);
           font-weight: 800;
-          font-size: clamp(2.8rem, 7vw, 5.5rem);
-          line-height: 0.95;
-          letter-spacing: -0.03em;
-          color: #e8fff2;
-          margin-bottom: 2rem;
         }
 
-        .header-title .accent {
-          color: #3dffa0;
+        .accent {
           display: block;
+          color: #3dffa0;
         }
 
-        .header-divider {
-          width: 100%;
-          height: 1px;
-          background: linear-gradient(to right, #3dffa0 0%, rgba(61,255,160,0.1) 60%, transparent 100%);
-          margin-bottom: 1.8rem;
+        .header-time {
+          margin-top: 1rem;
+          font-family: 'Space Mono';
+          color: #3dffa0;
         }
 
-        .header-bio {
-          font-family: 'Space Mono', monospace;
+        .theme-toggle {
+          margin-top: 1rem;
+          border: 1px solid #3dffa0;
+          background: transparent;
+          color: #3dffa0;
+          padding: 0.4rem 0.8rem;
+          cursor: pointer;
+        }
+
+        /* ABOUT BLOCK */
+        .about-block {
+          margin-top: 3rem;
+          padding: 1.5rem;
+          border: 1px solid rgba(61,255,160,0.2);
+          background: rgba(61,255,160,0.03);
+        }
+
+        .about-block h2 {
+          color: #3dffa0;
+          margin-bottom: 1rem;
+        }
+
+        .about-text {
+          font-family: 'Space Mono';
           font-size: 0.85rem;
-          line-height: 1.9;
-          color: #7ecca4;
-          max-width: 520px;
+          line-height: 1.8;
         }
 
-        .header-bio span {
-          color: #3dffa0;
-          font-style: italic;
+        .about-section {
+          margin-top: 1.5rem;
         }
 
-        .header-stack {
-          margin-top: 2rem;
+        .tags {
           display: flex;
-          align-items: center;
-          gap: 0.5rem;
           flex-wrap: wrap;
+          gap: 0.5rem;
         }
 
-        .stack-label {
-          font-family: 'Space Mono', monospace;
-          font-size: 0.65rem;
-          letter-spacing: 0.2em;
-          color: #3a7a5a;
-          text-transform: uppercase;
-          margin-right: 0.3rem;
-        }
-
-        .stack-tag {
-          font-family: 'Space Mono', monospace;
+        .tag {
+          border: 1px solid rgba(61,255,160,0.3);
+          padding: 0.2rem 0.6rem;
           font-size: 0.7rem;
-          padding: 0.25rem 0.7rem;
-          border: 1px solid rgba(61,255,160,0.25);
-          color: #3dffa0;
-          border-radius: 2px;
-          background: rgba(61,255,160,0.05);
-          letter-spacing: 0.05em;
         }
 
-        /* Animated fade-in for header */
-        @keyframes fadeUp {
-          from { opacity: 0; transform: translateY(24px); }
-          to   { opacity: 1; transform: translateY(0); }
+        .songs {
+          font-family: 'Space Mono';
+          font-size: 0.8rem;
+          margin-top: 0.5rem;
         }
-
-        .header-eyebrow { animation: fadeUp 0.6s ease both; }
-        .header-title   { animation: fadeUp 0.6s 0.12s ease both; }
-        .header-divider { animation: fadeUp 0.6s 0.22s ease both; }
-        .header-bio     { animation: fadeUp 0.6s 0.32s ease both; }
-        .header-stack   { animation: fadeUp 0.6s 0.42s ease both; }
-
-        /* Main content wrapper */
-        .main-content {
-          position: relative;
-          z-index: 2;
-          padding: 0 1rem 5rem;
-        }
-
       `}</style>
 
-      <div className="app-root">
+      <div className={`app-root ${theme}`}>
         <canvas ref={canvasRef} className="bg-canvas" />
         <div className="scanlines" />
         <div className="vignette" />
 
         <div className="content">
           <header className="header">
-            <p className="header-eyebrow">Developer &amp; Modder</p>
             <h1 className="header-title">
-              .angel24.
+              {displayText}
               <span className="accent">Projects</span>
             </h1>
-            <div className="header-divider" />
-            <p className="header-bio">
-              I love to code. My goal is to master <span>most coding languages</span> so I can
-              build complex things — including <span>Among Us mods</span> and beyond.
-            </p>
-            <div className="header-stack">
-              <span className="stack-label">Built with</span>
-              {['React', 'TailwindCSS', 'Vite'].map((t) => (
-                <span key={t} className="stack-tag">{t}</span>
-              ))}
+
+            <div className="header-time">{time}</div>
+
+            <button
+              className="theme-toggle"
+              onClick={() => setTheme(theme === 'green' ? 'purple' : 'green')}
+            >
+              switch theme
+            </button>
+
+            {/* ABOUT BLOCK */}
+            <div className="about-block">
+              <h2>About Me</h2>
+
+              <p className="about-text">
+                I love to code. My goal is to master <span>most coding languages</span> so I can
+                build complex things — including <span>Among Us mods</span> and beyond.
+              </p>
+
+              <div className="about-section">
+                <h3>Coding Languages</h3>
+                <div className="tags">
+                  {['C#', 'JavaScript', 'HTML', 'CSS', 'Python'].map((lang) => (
+                    <span key={lang} className="tag">{lang}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="about-section">
+                <h3>Liked Songs</h3>
+                <ul className="songs">
+                  <li>Song 1</li>
+                  <li>Song 2</li>
+                  <li>Song 3</li>
+                  <li>Song 4</li>
+                  <li>Song 5</li>
+                </ul>
+              </div>
             </div>
           </header>
 
