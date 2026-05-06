@@ -8,6 +8,8 @@ function App() {
   const [time, setTime] = useState('');
   const [displayText, setDisplayText] = useState('');
   const [theme, setTheme] = useState('green');
+  const [songs, setSongs] = useState([]);
+  const [nowPlaying, setNowPlaying] = useState(null);
 
   const fullText = ".angel24.";
 
@@ -36,6 +38,39 @@ function App() {
 
     return () => clearInterval(interval);
   }, []);
+
+  // ===== Spotify Data =====
+  useEffect(() => {
+  const SERVER = 'https://portfolio-ep8j.onrender.com';
+
+  const load = () => {
+    fetch(`${SERVER}/top-tracks`)
+      .then(res => {
+        if (!res.ok) throw new Error(`top-tracks: ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        console.log('songs loaded:', data);
+        setSongs(data);
+      })
+      .catch(err => console.error('top-tracks failed:', err));
+
+    fetch(`${SERVER}/now-playing`)
+      .then(res => {
+        if (!res.ok) throw new Error(`now-playing: ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        console.log('now playing:', data);
+        setNowPlaying(data);
+      })
+      .catch(err => console.error('now-playing failed:', err));
+  };
+
+  load();
+  const interval = setInterval(load, 5000);
+  return () => clearInterval(interval);
+}, []);
 
   // ===== Star Background =====
   useEffect(() => {
@@ -212,6 +247,126 @@ function App() {
           font-size: 0.8rem;
           margin-top: 0.5rem;
         }
+
+        /* NOW PLAYING */
+        .now-playing {
+          display: flex;
+          gap: 1rem;
+          padding: 1rem;
+          border: 1px solid rgba(61,255,160,0.3);
+          margin-bottom: 2rem;
+          align-items: center;
+          animation: pulseGlow 2s infinite;
+        }
+
+        .now-playing img {
+          width: 64px;
+          height: 64px;
+          object-fit: cover;
+        }
+
+        .now-playing p {
+          font-size: 0.7rem;
+          color: #3dffa0;
+          font-family: 'Space Mono';
+          margin-bottom: 0.25rem;
+        }
+
+        .now-playing h3 {
+          font-size: 0.95rem;
+          margin-bottom: 0.15rem;
+        }
+
+        .now-playing span {
+          font-size: 0.8rem;
+          font-family: 'Space Mono';
+          opacity: 0.7;
+        }
+
+        @keyframes pulseGlow {
+          0%   { box-shadow: 0 0 5px rgba(61,255,160,0.2); }
+          50%  { box-shadow: 0 0 20px rgba(61,255,160,0.5); }
+          100% { box-shadow: 0 0 5px rgba(61,255,160,0.2); }
+        }
+
+        /* SONGS GRID */
+        .songs-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+          gap: 1rem;
+          margin-top: 1rem;
+        }
+
+        .song-card {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          text-decoration: none;
+          color: inherit;
+          border: 1px solid rgba(61,255,160,0.15);
+          padding: 0.75rem;
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .song-card img {
+          width: 100%;
+          aspect-ratio: 1;
+          object-fit: cover;
+        }
+
+        .song-card p {
+          font-size: 0.8rem;
+          font-weight: 600;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+
+        .song-card span {
+          font-size: 0.7rem;
+          font-family: 'Space Mono';
+          opacity: 0.6;
+        }
+
+        .song-card:hover {
+          transform: scale(1.05);
+          box-shadow: 0 0 25px rgba(61,255,160,0.25);
+        }
+
+@media (max-width: 600px) {
+  .header {
+    padding: 2rem 1rem;
+  }
+
+  .songs-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+
+  .song-card p {
+    font-size: 0.75rem;
+  }
+
+  .now-playing {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .now-playing img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+  }
+
+  .now-playing h3 {
+    font-size: 0.85rem;
+  }
+
+  .header-title {
+    font-size: clamp(2rem, 10vw, 4rem);
+  }
+}
       `}</style>
 
       <div className={`app-root ${theme}`}>
@@ -226,7 +381,7 @@ function App() {
               <span className="accent">Projects</span>
             </h1>
 
-            <div className="header-time">{time}</div>
+            <div className="header-time">My local time: {time}</div>
 
             <button
               className="theme-toggle"
@@ -255,13 +410,58 @@ function App() {
 
               <div className="about-section">
                 <h3>Liked Songs</h3>
-                <ul className="songs">
-                  <li>Song 1</li>
-                  <li>Song 2</li>
-                  <li>Song 3</li>
-                  <li>Song 4</li>
-                  <li>Song 5</li>
-                </ul>
+
+                {nowPlaying?.item && (
+                  <div className="now-playing">
+                    <img src={nowPlaying.item.album.images[1].url} alt={nowPlaying.item.name} />
+                    <div>
+                      <p>▶ Now Playing</p>
+                      <h3>{nowPlaying.item.name}</h3>
+                      <span>{nowPlaying.item.artists[0].name}</span>
+                      <span style={{ display: 'block', fontSize: '0.65rem', opacity: 0.45, fontFamily: 'Space Mono', marginTop: '0.2rem' }}>
+                        {nowPlaying.item.album.name}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                <div className="songs-grid">
+                  {songs.map(song => (
+                    <a
+                      key={song.id}
+                      href={song.external_urls.spotify}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="song-card"
+                      onMouseEnter={(e) => {
+                        e.currentTarget.querySelector('.open-spotify').style.opacity = '1';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.querySelector('.open-spotify').style.opacity = '0';
+                      }}
+                    >
+                      <img src={song.album.images[1].url} alt={song.name} />
+                      <div>
+                        <p>{song.name}</p>
+                        <span>{song.artists[0].name}</span>
+                        <span style={{ display: 'block', fontSize: '0.65rem', opacity: 0.45, fontFamily: 'Space Mono', marginTop: '0.2rem' }}>
+                          {song.album.name}
+                        </span>
+                        <span className="open-spotify" style={{
+                          display: 'block',
+                          fontSize: '0.65rem',
+                          fontFamily: 'Space Mono',
+                          color: '#3dffa0',
+                          opacity: 0,
+                          transition: 'opacity 0.2s',
+                          marginTop: '0.3rem'
+                           }}>
+                          ↗ open in spotify
+                        </span>
+                      </div>
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </header>
