@@ -86,6 +86,8 @@ app.get('/callback', async (req, res) => {
 // ==========================
 // 🔥 TOP TRACKS (30 min cache)
 // ==========================
+let isFetchingTracks = false;
+
 app.get('/top-tracks', async (req, res) => {
   try {
     const now = Date.now();
@@ -93,7 +95,7 @@ app.get('/top-tracks', async (req, res) => {
     const isCacheValid =
       cachedTracks && now - tracksLastFetch < 30 * 60 * 1000;
 
-    // If cache is valid, return it immediately
+    // ✅ Always return cache if valid
     if (isCacheValid) {
       return res.json({
         data: cachedTracks,
@@ -101,12 +103,22 @@ app.get('/top-tracks', async (req, res) => {
       });
     }
 
-    if (!access_token) {
-      return res.status(401).json({
-        error: 'No access token',
-        retryAfter: null
+    // 🔒 Prevent multiple Spotify calls at once
+    if (isFetchingTracks) {
+      return res.json({
+        data: cachedTracks || [],
+        cached: true,
+        loading: true
       });
     }
+
+    if (!access_token) {
+      return res.status(401).json({
+        error: 'No access token'
+      });
+    }
+
+    isFetchingTracks = true;
 
     const r = await axios.get(
       'https://api.spotify.com/v1/me/top/tracks?limit=6',
@@ -118,39 +130,42 @@ app.get('/top-tracks', async (req, res) => {
     cachedTracks = r.data.items;
     tracksLastFetch = now;
 
-    res.json({
+    isFetchingTracks = false;
+
+    return res.json({
       data: cachedTracks,
       cached: false
     });
 
   } catch (err) {
+    isFetchingTracks = false;
+
     const status = err.response?.status;
     const retryAfter = err.response?.headers?.['retry-after'];
 
-    console.error('top-tracks error:', status, err.response?.data || err.message);
+    console.error(
+      'top-tracks error:',
+      status,
+      err.response?.data || err.message
+    );
 
-    // 🔥 HANDLE RATE LIMIT PROPERLY
+    // 🚨 RATE LIMIT HANDLING
     if (status === 429) {
       return res.status(429).json({
-        error: 'Rate limited by Spotify',
+        error: 'Spotify rate limited request',
         retryAfter: retryAfter || 30,
-        cached: cachedTracks || []
+        data: cachedTracks || []
       });
     }
 
-    // 🔥 TOKEN EXPIRED
+    // 🔑 TOKEN EXPIRED
     if (status === 401) {
       await refreshAccessToken();
-
-      return res.status(401).json({
-        error: 'Token expired, refreshing...',
-        retryAfter: null
-      });
     }
 
-    res.status(500).json({
+    return res.status(500).json({
       error: 'top tracks failed',
-      retryAfter: null
+      data: cachedTracks || []
     });
   }
 });
