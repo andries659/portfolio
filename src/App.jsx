@@ -67,21 +67,42 @@ function App() {
 
     if (res.status === 429) {
       console.warn(`Rate limited. Retry after ${json.retryAfter}s`);
-      setter([]);
+
+      if (url.includes('top-tracks')) {
+        setter([]);
+      } else {
+        setter(null);
+      }
+
       return;
     }
 
     if (!res.ok) {
       console.error(json);
-      setter([]);
+
+      if (url.includes('top-tracks')) {
+        setter([]);
+      } else {
+        setter(null);
+      }
+
       return;
     }
 
-    setter(json.data || []);
+    if (url.includes('top-tracks')) {
+      setter(json.data || []);
+    } else {
+      setter(json);
+    }
 
   } catch (err) {
     console.error('Fetch error:', err);
-    setter([]);
+
+    if (url.includes('top-tracks')) {
+      setter([]);
+    } else {
+      setter(null);
+    }
   }
 };
 
