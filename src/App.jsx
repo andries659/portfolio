@@ -95,34 +95,41 @@ function App() {
   useEffect(() => {
   const SERVER = 'https://portfolio-ep8j.onrender.com';
 
-  const loadTopTracks = () => {
-    fetch(`${SERVER}/top-tracks`)
-      .then(res => {
-        if (!res.ok) throw new Error(`top-tracks: ${res.status}`);
-        return res.json();
-      })
-      .then(data => setSongs(data))
-      .catch(err => console.error('top-tracks failed:', err));
+  const safeFetch = async (url, setter) => {
+    try {
+      const res = await fetch(url);
+
+      // Handle rate limiting
+      if (res.status === 429) {
+        const retryAfter = res.headers.get('retry-after');
+        console.warn(`Rate limited (${url}). Retry after ${retryAfter}s`);
+        return;
+      }
+
+      if (!res.ok) throw new Error(`${url} failed: ${res.status}`);
+
+      const data = await res.json();
+      setter(data);
+
+    } catch (err) {
+      console.error('Fetch error:', err);
+    }
   };
 
-  const loadNowPlaying = () => {
-    fetch(`${SERVER}/now-playing`)
-      .then(res => {
-        if (!res.ok) throw new Error(`now-playing: ${res.status}`);
-        return res.json();
-      })
-      .then(data => setNowPlaying(data))
-      .catch(err => console.error('now-playing failed:', err));
-  };
+  const loadTopTracks = () =>
+    safeFetch(`${SERVER}/top-tracks`, setSongs);
 
-  // initial load
+  const loadNowPlaying = () =>
+    safeFetch(`${SERVER}/now-playing`, setNowPlaying);
+
+  // Initial load
   loadTopTracks();
   loadNowPlaying();
 
-  // now playing → every 5 seconds
+  // Now playing → every 5 seconds
   const nowInterval = setInterval(loadNowPlaying, 5000);
 
-  // top tracks → every 30 minutes
+  // Top tracks → every 30 minutes
   const tracksInterval = setInterval(loadTopTracks, 30 * 60 * 1000);
 
   return () => {
