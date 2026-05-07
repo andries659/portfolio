@@ -90,33 +90,70 @@ app.get('/top-tracks', async (req, res) => {
   try {
     const now = Date.now();
 
-    if (!cachedTracks || now - tracksLastFetch > 30 * 60 * 1000) {
-      if (!access_token) return res.status(401).json({ error: 'No token' });
+    const isCacheValid =
+      cachedTracks && now - tracksLastFetch < 30 * 60 * 1000;
 
-      const r = await axios.get(
-        'https://api.spotify.com/v1/me/top/tracks?limit=6',
-        {
-          headers: { Authorization: `Bearer ${access_token}` }
-        }
-      );
-
-      cachedTracks = r.data.items;
-      tracksLastFetch = now;
+    // If cache is valid, return it immediately
+    if (isCacheValid) {
+      return res.json({
+        data: cachedTracks,
+        cached: true
+      });
     }
 
-    res.json(cachedTracks);
+    if (!access_token) {
+      return res.status(401).json({
+        error: 'No access token',
+        retryAfter: null
+      });
+    }
+
+    const r = await axios.get(
+      'https://api.spotify.com/v1/me/top/tracks?limit=6',
+      {
+        headers: { Authorization: `Bearer ${access_token}` }
+      }
+    );
+
+    cachedTracks = r.data.items;
+    tracksLastFetch = now;
+
+    res.json({
+      data: cachedTracks,
+      cached: false
+    });
+
   } catch (err) {
-    console.error('top-tracks error:', err.response?.data || err.message);
+    const status = err.response?.status;
+    const retryAfter = err.response?.headers?.['retry-after'];
 
-    // token expired → try refresh once
-    if (err.response?.status === 401) {
-      await refreshAccessToken();
+    console.error('top-tracks error:', status, err.response?.data || err.message);
+
+    // 🔥 HANDLE RATE LIMIT PROPERLY
+    if (status === 429) {
+      return res.status(429).json({
+        error: 'Rate limited by Spotify',
+        retryAfter: retryAfter || 30,
+        cached: cachedTracks || []
+      });
     }
 
-    res.status(500).json({ error: 'top tracks failed' });
+    // 🔥 TOKEN EXPIRED
+    if (status === 401) {
+      await refreshAccessToken();
+
+      return res.status(401).json({
+        error: 'Token expired, refreshing...',
+        retryAfter: null
+      });
+    }
+
+    res.status(500).json({
+      error: 'top tracks failed',
+      retryAfter: null
+    });
   }
 });
-
 
 // ==========================
 // 🔥 NOW PLAYING (5–10 sec cache)
