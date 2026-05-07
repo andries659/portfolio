@@ -165,7 +165,10 @@ function App() {
 
               {nowPlaying?.item && (
                 <div className="now-playing">
-                  <img src={nowPlaying.item.album.images[1].url} alt={nowPlaying.item.name} />
+                  <img
+  src={nowPlaying.item.album.images?.[1]?.url || nowPlaying.item.album.images?.[0]?.url}
+  alt={nowPlaying.item.name}
+/>
                   <div>
                     <p className="now-playing-label">▶ Now Playing</p>
                     <h3>{nowPlaying.item.name}</h3>
@@ -176,7 +179,7 @@ function App() {
               )}
 
               <div className="songs-grid">
-                {songs.map(song => (
+                {Array.isArray(songs) && songs.map(song => (
                   <a
                     key={song.id}
                     href={song.external_urls.spotify}
@@ -184,7 +187,10 @@ function App() {
                     rel="noreferrer"
                     className="song-card"
                   >
-                    <img src={song.album.images[1].url} alt={song.name} />
+                    <img
+  src={song.album.images?.[1]?.url || song.album.images?.[0]?.url}
+  alt={song.name}
+/>
                     <div>
                       <p>{song.name}</p>
                       <span>{song.artists[0].name}</span>
