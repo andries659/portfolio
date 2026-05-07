@@ -93,22 +93,43 @@ function App() {
 
   // ===== Spotify Data =====
   useEffect(() => {
-    const SERVER = 'https://portfolio-ep8j.onrender.com';
-    const load = () => {
-      fetch(`${SERVER}/top-tracks`)
-        .then(res => { if (!res.ok) throw new Error(`top-tracks: ${res.status}`); return res.json(); })
-        .then(data => setSongs(data))
-        .catch(err => console.error('top-tracks failed:', err));
+  const SERVER = 'https://portfolio-ep8j.onrender.com';
 
-      fetch(`${SERVER}/now-playing`)
-        .then(res => { if (!res.ok) throw new Error(`now-playing: ${res.status}`); return res.json(); })
-        .then(data => setNowPlaying(data))
-        .catch(err => console.error('now-playing failed:', err));
-    };
-    load();
-    const interval = setInterval(load, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  const loadTopTracks = () => {
+    fetch(`${SERVER}/top-tracks`)
+      .then(res => {
+        if (!res.ok) throw new Error(`top-tracks: ${res.status}`);
+        return res.json();
+      })
+      .then(data => setSongs(data))
+      .catch(err => console.error('top-tracks failed:', err));
+  };
+
+  const loadNowPlaying = () => {
+    fetch(`${SERVER}/now-playing`)
+      .then(res => {
+        if (!res.ok) throw new Error(`now-playing: ${res.status}`);
+        return res.json();
+      })
+      .then(data => setNowPlaying(data))
+      .catch(err => console.error('now-playing failed:', err));
+  };
+
+  // initial load
+  loadTopTracks();
+  loadNowPlaying();
+
+  // now playing → every 5 seconds
+  const nowInterval = setInterval(loadNowPlaying, 5000);
+
+  // top tracks → every 30 minutes
+  const tracksInterval = setInterval(loadTopTracks, 30 * 60 * 1000);
+
+  return () => {
+    clearInterval(nowInterval);
+    clearInterval(tracksInterval);
+  };
+}, []);
 
   // ===== Star Background =====
   useEffect(() => {
