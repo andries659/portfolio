@@ -1,5 +1,13 @@
 
 @tailwind base;
+
+@layer base {
+  html, body {
+    background: #050d0a !important;
+    margin: 0;
+  }
+}
+
 @tailwind components;
 @tailwind utilities;
 
