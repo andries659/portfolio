@@ -78,7 +78,7 @@ function App() {
     safeFetch(`${SERVER}/now-playing`, setNowPlaying);
 
     const nowInterval    = setInterval(() => safeFetch(`${SERVER}/now-playing`, setNowPlaying), 5000);
-    const tracksInterval = setInterval(() => safeFetch(`${SERVER}/top-tracks`, setSongs), 30 * 60 * 1000);
+    const tracksInterval = setInterval(() => safeFetch(`${SERVER}/top-tracks`, setSongs), 60000);
 
     return () => { clearInterval(nowInterval); clearInterval(tracksInterval); };
   }, []);
