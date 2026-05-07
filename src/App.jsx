@@ -61,18 +61,29 @@ function App() {
     const SERVER = 'https://portfolio-ep8j.onrender.com';
 
     const safeFetch = async (url, setter) => {
-      try {
-        const res = await fetch(url);
-        if (res.status === 429) {
-          console.warn(`Rate limited. Retry after ${res.headers.get('retry-after')}s`);
-          return;
-        }
-        if (!res.ok) throw new Error(`${url} failed: ${res.status}`);
-        setter(await res.json());
-      } catch (err) {
-        console.error('Fetch error:', err);
-      }
-    };
+  try {
+    const res = await fetch(url);
+    const json = await res.json();
+
+    if (res.status === 429) {
+      console.warn(`Rate limited. Retry after ${json.retryAfter}s`);
+      setter([]);
+      return;
+    }
+
+    if (!res.ok) {
+      console.error(json);
+      setter([]);
+      return;
+    }
+
+    setter(json.data || []);
+
+  } catch (err) {
+    console.error('Fetch error:', err);
+    setter([]);
+  }
+};
 
     safeFetch(`${SERVER}/top-tracks`, setSongs);
     safeFetch(`${SERVER}/now-playing`, setNowPlaying);
