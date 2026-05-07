@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&family=Syne:wght@400;600;800&display=swap');
+
+/* ===== CSS Variables (defaults = green theme) ===== */
+:root {
+  --bg: #050d0a;
+  --color: #e0ffe8;
+  --accent: #3dffa0;
+  --vignette: rgba(40, 255, 120, 0.1);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+  background: var(--bg);
+  color: var(--color);
+  font-family: 'Syne', sans-serif;
+  transition: background 0.4s, color 0.4s;
+}
+
+/* ===== Layout ===== */
+.app-root {
+  min-height: 100vh;
+  position: relative;
+}
+
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.scanlines {
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+  pointer-events: none;
+}
+
+.vignette {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at top, var(--vignette), transparent);
+  transition: background 0.4s;
+  pointer-events: none;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== Header ===== */
+.header {
+  padding: 3rem 2rem;
+  max-width: 900px;
+  margin: auto;
+}
+
+.header-title {
+  font-size: clamp(3rem, 6vw, 5rem);
+  font-weight: 800;
+}
+
+.accent-text {
+  display: block;
+  color: var(--accent);
+  transition: color 0.4s;
+}
+
+.header-time {
+  margin-top: 1rem;
+  font-family: 'Space Mono', monospace;
+  color: var(--accent);
+  transition: color 0.4s;
+}
+
+.theme-toggle {
+  margin-top: 1rem;
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  padding: 0.4rem 0.8rem;
+  cursor: pointer;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  transition: border-color 0.4s, color 0.4s, box-shadow 0.2s;
+}
+
+.theme-toggle:hover {
+  box-shadow: 0 0 10px color-mix(in srgb, var(--accent) 33%, transparent);
+}
+
+/* ===== About Block ===== */
+.about-block {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+  background: color-mix(in srgb, var(--accent) 3%, transparent);
+  transition: border-color 0.4s, background 0.4s;
+}
+
+.about-block h2 {
+  color: var(--accent);
+  margin-bottom: 1rem;
+  transition: color 0.4s;
+}
+
+.about-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.85rem;
+  line-height: 1.8;
+}
+
+.about-section {
+  margin-top: 1.5rem;
+}
+
+/* ===== Tags ===== */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tag {
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.7rem;
+  transition: border-color 0.4s;
+}
+
+/* ===== Now Playing ===== */
+.now-playing {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  margin-bottom: 2rem;
+  align-items: center;
+  animation: pulseGlow 2s infinite;
+  transition: border-color 0.4s;
+}
+
+.now-playing img {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+}
+
+.now-playing-label {
+  font-size: 0.7rem;
+  color: var(--accent);
+  font-family: 'Space Mono', monospace;
+  margin-bottom: 0.25rem;
+  transition: color 0.4s;
+}
+
+.now-playing h3 {
+  font-size: 0.95rem;
+  margin-bottom: 0.15rem;
+}
+
+.now-playing span {
+  font-size: 0.8rem;
+  font-family: 'Space Mono', monospace;
+  opacity: 0.7;
+}
+
+@keyframes pulseGlow {
+  0%   { box-shadow: 0 0 5px  color-mix(in srgb, var(--accent) 20%, transparent); }
+  50%  { box-shadow: 0 0 20px color-mix(in srgb, var(--accent) 50%, transparent); }
+  100% { box-shadow: 0 0 5px  color-mix(in srgb, var(--accent) 20%, transparent); }
+}
+
+/* ===== Songs Grid ===== */
+.songs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.song-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
+  padding: 0.75rem;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.4s;
+}
+
+.song-card img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.song-card p {
+  font-size: 0.8rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.song-card span {
+  font-size: 0.7rem;
+  font-family: 'Space Mono', monospace;
+  opacity: 0.6;
+}
+
+.song-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+.song-card:hover .open-spotify {
+  opacity: 1 !important;
+}
+
+.sub-text {
+  display: block;
+  font-size: 0.65rem !important;
+  opacity: 0.45 !important;
+  font-family: 'Space Mono', monospace;
+  margin-top: 0.2rem;
+}
+
+.open-spotify {
+  display: block;
+  font-size: 0.65rem;
+  font-family: 'Space Mono', monospace;
+  opacity: 0;
+  margin-top: 0.3rem;
+  color: var(--accent);
+  transition: opacity 0.2s, color 0.4s;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .header { padding: 2rem 1rem; }
+  .header-title { font-size: clamp(2rem, 10vw, 4rem); }
+  .songs-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .song-card p { font-size: 0.75rem; }
+  .now-playing { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+  .now-playing img { width: 100%; height: auto; aspect-ratio: 1; }
+  .now-playing h3 { font-size: 0.85rem; }
+}
