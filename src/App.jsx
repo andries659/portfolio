@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Portfolio from './components/Portfolio';
 import './App.css';
+import WeeklyLyric from './components/WeeklyLyric';
 
 // ===== Theme Definitions =====
 const THEMES = [
@@ -193,6 +194,7 @@ function App() {
             </div>
 
             <div className="about-section">
+              <WeeklyLyric />
               <h3>Liked Songs</h3>
 
               {nowPlaying?.item && (
