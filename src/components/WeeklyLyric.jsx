@@ -4,15 +4,13 @@ import React, { useEffect, useState } from 'react';
 const LYRIC = {
   lines: [
     'The greatest, ooh',
-    'I, I loved you',
-    'And I still do',
+    'I, I loved you and I still do',
     'Just wanted passion from you',
     'Just wanted what I gave you',
-    'I waited',
-    'And waited',
+    'I waited and waited',
   ],
-  song: '',      // e.g. 'The Greatest'
-  artist: '',    // e.g. 'Billie Eilish'
+  song: 'THE GREATEST',
+  artist: 'Billie Eilish',
 };
 // ====================================================================
 
@@ -29,7 +27,7 @@ export default function WeeklyLyric() {
 
   return (
     <div className="weekly-lyric-block">
-      <p className="weekly-lyric-label">// weekly lyric</p>
+      <p className="weekly-lyric-label">// Weekly Lyric</p>
 
       <div className="weekly-lyric-lines">
         {LYRIC.lines.map((line, i) => (
