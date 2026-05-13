@@ -11,6 +11,7 @@ const LYRIC = {
   ],
   song: 'THE GREATEST',
   artist: 'Billie Eilish',
+  album: 'HIT ME HARD AND SOFT',
 };
 // ====================================================================
 
@@ -45,6 +46,8 @@ export default function WeeklyLyric() {
           {LYRIC.song && <span className="weekly-lyric-song">{LYRIC.song}</span>}
           {LYRIC.song && LYRIC.artist && <span className="weekly-lyric-sep">—</span>}
           {LYRIC.artist && <span className="weekly-lyric-artist">{LYRIC.artist}</span>}
+          {LYRIC.artist && LYRIC.album && <span className="weekly-lyric-sep">—</span>}
+          {LYRIC.album && <span className="weekly-lyric-artist">{LYRIC.album}</span>}
         </div>
       )}
 
