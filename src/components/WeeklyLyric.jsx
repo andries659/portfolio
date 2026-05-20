@@ -3,11 +3,12 @@ import React, { useEffect, useState } from 'react';
 // ===== Update this whenever you want to change the weekly lyric =====
 const LYRIC = {
   lines: [
-    'The greatest, ooh',
-    'I, I loved you and I still do',
-    'Just wanted passion from you',
-    'Just wanted what I gave you',
-    'I waited and waited',
+    'If the world was ending',
+    'I\'d wanna be next to you',
+    'If the party was over',
+    'And our time on Earth was through',
+    'I wanna hold you just for a while and die, die, die with a smile',
+    'If the world was ending I\'d wanna be next to you'
   ],
   song: 'THE GREATEST',
   artist: 'Billie Eilish',
