@@ -10,9 +10,9 @@ const LYRIC = {
     'I wanna hold you just for a while and die, die, die with a smile',
     'If the world was ending I\'d wanna be next to you'
   ],
-  song: 'THE GREATEST',
-  artist: 'Billie Eilish',
-  album: 'HIT ME HARD AND SOFT',
+  song: 'Die With A Smile (Apple Music Live)',
+  artist: 'Lady Gaga & Bruno Mars',
+  album: 'MAYHEM Requiem (Apple Music Live)',
 };
 // ====================================================================
 
