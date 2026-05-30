@@ -3,16 +3,16 @@ import React, { useEffect, useState } from 'react';
 // ===== Update this whenever you want to change the weekly lyric =====
 const LYRIC = {
   lines: [
-    'If the world was ending',
-    'I\'d wanna be next to you',
-    'If the party was over',
-    'And our time on Earth was through',
-    'I wanna hold you just for a while and die, die, die with a smile',
-    'If the world was ending I\'d wanna be next to you'
+    '♡ yeah i, i, i',
+    'hate that i made you love me',
+    'sorry if i made me your type',
+    'yeah i, i, i',
+    'hate that i made you love me',
+    '\'cause i barely tried'
   ],
-  song: 'Die With A Smile (Apple Music Live)',
-  artist: 'Lady Gaga & Bruno Mars',
-  album: 'MAYHEM Requiem (Apple Music Live)',
+  song: 'hate that i made you love me',
+  artist: 'Ariane Grande',
+  album: 'petal (Releases June 31)',
 };
 // ====================================================================
 
