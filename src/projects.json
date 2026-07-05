@@ -1,38 +1,43 @@
 [
   {
-    "title": "Town Of Re-Worked: Launchpad (TOR-W: L)",
-    "description": "An Among Us mod with custom roles and options.",
-    "github": "https://github.com/TownofReworked/TORWLaunchpad",
-    "download": "https://github.com/TownofReworked/TORWLaunchpad/releases/latest",
+    "title": "Among Us QoL Mod",
+    "description": "An Among Us mod with custom qaulity of life features made to improve the game.",
+	"relation": "Owner",
+    "github": "",
+    "download": "",
     "type": "mod",
-    "tags": ["Among Us", "Mod", "C#"]
+    "tags": ["Among Us", "Mod", "C#", "Game"]
   },
   {
-    "title": "TOR-W Bot",
-    "description": "A Discord bot with welcome systems, minigames, and many more.",
-    "link": "https://discord.com/oauth2/authorize?client_id=1345729546476982343&permissions=8&integration_type=0&scope=bot+applications.commands",
-    "type": "bot",
-    "tags": ["Discord", "Python", "Bot"]
+    "title": "Terraria Relics",
+    "description": "A mod for Terraria which adds Runes to the game with unique abilities.",
+	"relation": "Owner",
+    "link": "",
+    "type": "mod",
+    "tags": ["Terraria", "Game", "Mod"]
   },
   {
-    "title": "TOR-W Website",
-    "description": "The website for the TOR-W: L mod which contains all the information for the mod.",
-    "link": "https://torw-l.vercel.app/",
-    "type": "website",
-    "tags": ["Website", "TailwindCSS", "Next.js"]
+    "title": "Seasons+",
+    "description": "A Minecraft: Bedrock Edition mod which adds seasons to the game.",
+	"relation": "Owner",
+    "link": "",
+    "type": "mod",
+    "tags": ["Mod", "Minecraft", "Game"]
   },
   {
     "title": "Mafia Web Game",
     "description": "A website verion of \"Mafia: Remastered\" bot game on Discord.",
+	"relation": "Owner",
     "link": "https://mafia-web-game.vercel.app",
     "type": "website",
     "tags": ["Website", "TailwindCSS", "Vite"]
   },
   {
-    "title": "Among Us Detective Board",
-    "description": "The official detective board for the players of the AMong Us mod TOR-W:L.",
-    "link": "https://townofreworked.github.io/modded-detective-board/",
-    "type": "website",
-    "tags": ["Website", "HTML & CSS"]
+	"title": "Town Of Host: Optimized (TOHO)",
+	"description": "TOHO is a Host-Only among us mod with hundreds of new roles, multiple Game Modes, and many game optimizations!",
+	"relation": "Associate",
+	"link": "https://github.com/Limeau/TownofHost-Optimized",
+	"type": "mod",
+	"tags": ["Among Us", "Mod", "C#", "Game"]
   }
 ]

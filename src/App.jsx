@@ -195,10 +195,10 @@ function App() {
 
             <div className="about-section">
               <WeeklyLyric />
-              <h3>Liked Songs</h3>
-
-              {nowPlaying?.item && (
+			  <br />
+			  {nowPlaying?.item && (
                 <div className="now-playing">
+				<h3>Currently Listening</h3>
                   <img
   src={nowPlaying.item.album.images?.[1]?.url || nowPlaying.item.album.images?.[0]?.url}
   alt={nowPlaying.item.name}
@@ -211,6 +211,8 @@ function App() {
                   </div>
                 </div>
               )}
+			  
+              <h3>Most Streamed Songs</h3>
 
               <div className="songs-grid">
                 {Array.isArray(songs) && songs.map(song => (

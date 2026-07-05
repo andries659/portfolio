@@ -11,8 +11,8 @@ const LYRIC = {
     '\'cause i barely tried'
   ],
   song: 'hate that i made you love me',
-  artist: 'Ariane Grande',
-  album: 'petal (Releases June 31)',
+  artist: 'Ariana Grande',
+  album: 'petal (Releases July 31)',
 };
 // ====================================================================
 

@@ -364,7 +364,7 @@ export default function Portfolio() {
           <input
             className="search-input"
             type="text"
-            placeholder="search projects, tags..."
+            placeholder="Search projects, tags..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -407,6 +407,7 @@ export default function Portfolio() {
                 <div className="card-body">
                   <h2 className="card-title">{project.title}</h2>
                   <p className="card-desc">{project.description}</p>
+				  <p className="card-desc">Affeliation: {project.relation}</p>
 
                   {project.tags?.length > 0 && (
                     <div className="card-tags">
