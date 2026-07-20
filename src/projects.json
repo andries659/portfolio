@@ -1,5 +1,14 @@
 [
   {
+    "title": "TOHO Website",
+    "description": "The official TOHO website regarding the entire mod.",
+	"relation": "Owner",
+    "github": "https://github.com/andries659/toho-au-website",
+    "link": "https://toho-au.vercel.app",
+    "type": "website",
+    "tags": ["Among Us", "Mod", "Website", "Info", "TailwindCSS", "Next.js"]
+  },
+  {
     "title": "Among Us QoL Mod",
     "description": "An Among Us mod with custom qaulity of life features made to improve the game.",
 	"relation": "Owner",
@@ -30,7 +39,7 @@
 	"relation": "Owner",
     "link": "https://mafia-web-game.vercel.app",
     "type": "website",
-    "tags": ["Website", "TailwindCSS", "Vite"]
+    "tags": ["Website", "TailwindCSS", "Vite", "Fun", "Games"]
   },
   {
 	"title": "Town Of Host: Optimized (TOHO)",
