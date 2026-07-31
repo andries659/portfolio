@@ -3,16 +3,25 @@ import React, { useEffect, useState } from 'react';
 // ===== Update this whenever you want to change the weekly lyric =====
 const LYRIC = {
   lines: [
-    '♡ yeah i, i, i',
-    'hate that i made you love me',
-    'sorry if i made me your type',
-    'yeah i, i, i',
-    'hate that i made you love me',
-    '\'cause i barely tried'
+    'Cause all of my favorite stories'
+'End in some kind of catastrophe'
+'But I don\'t need someone to save me'
+'\'Cause this music and I will never die'
+
+'It\'s such a fucked situation'
+'Petal in the pavement'
+'Just as long as she keeps getting it right'
+'Heartbreak won\'t bite'
+'Here in paradise'
+'Such a convenient conflation'
+'This record in rotation'
+'Long as she gets the ovation each night'
+'Heartbreak won\'t bite'
+'This is paradise'
   ],
-  song: 'hate that i made you love me',
+  song: 'petal',
   artist: 'Ariana Grande',
-  album: 'petal (Releases July 31)',
+  album: 'petal',
 };
 // ====================================================================
 
