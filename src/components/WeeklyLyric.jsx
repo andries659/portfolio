@@ -3,20 +3,20 @@ import React, { useEffect, useState } from 'react';
 // ===== Update this whenever you want to change the weekly lyric =====
 const LYRIC = {
   lines: [
-    'Cause all of my favorite stories'
-'End in some kind of catastrophe'
-'But I don\'t need someone to save me'
-'\'Cause this music and I will never die'
+    'Cause all of my favorite stories',
+'End in some kind of catastrophe',
+'But I don\'t need someone to save me',
+'\'Cause this music and I will never die',
 
-'It\'s such a fucked situation'
-'Petal in the pavement'
-'Just as long as she keeps getting it right'
-'Heartbreak won\'t bite'
-'Here in paradise'
-'Such a convenient conflation'
-'This record in rotation'
-'Long as she gets the ovation each night'
-'Heartbreak won\'t bite'
+'It\'s such a fucked situation',
+'Petal in the pavement',
+'Just as long as she keeps getting it right',
+'Heartbreak won\'t bite',
+'Here in paradise',
+'Such a convenient conflation',
+'This record in rotation',
+'Long as she gets the ovation each night',
+'Heartbreak won\'t bite',
 'This is paradise'
   ],
   song: 'petal',
