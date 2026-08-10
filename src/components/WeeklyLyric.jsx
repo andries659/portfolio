@@ -8,9 +8,9 @@ const LYRIC = {
 	'If I gave back all the pain that you put me through',
 	'what would you do?',
   ],
-  song: 'petal',
-  artist: 'Ariana Grande',
-  album: 'petal',
+  song: 'what would you do?',
+  artist: 'Tate McRae',
+  album: 'i used to think i could fly',
 };
 // ====================================================================
 
