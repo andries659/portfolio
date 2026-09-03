@@ -245,6 +245,26 @@ html, body {
   transition: opacity 0.2s, color 0.4s;
 }
 
+.relationship-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--accent);
+  margin-top: 4px;
+}
+
+.heart-icon {
+  display: inline-block;
+  animation: heartbeat 1.2s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.2); }
+  50% { transform: scale(1); }
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 600px) {
   .header { padding: 2rem 1rem; }
