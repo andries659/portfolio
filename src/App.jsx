@@ -171,6 +171,9 @@ function App() {
           </h1>
 
           <div className="header-time">My local time: {time}</div>
+          <div className="relationship-status">
+            <span className="heart-icon">♥</span> Relationship Status: Taken
+          </div>
 
           <button className="theme-toggle" onClick={cycleTheme}>
             Switch Theme: {theme.label}
