@@ -3,14 +3,15 @@ import React, { useEffect, useState } from 'react';
 // ===== Update this whenever you want to change the weekly lyric =====
 const LYRIC = {
   lines: [
-    'what would you do if I leave and don\'t come back?',
-	'i hope it breaks you in two',
-	'If I gave back all the pain that you put me through',
-	'what would you do?',
+    'And it\'s too hard to describe this',
+'In a way that feels honest, but even when I\'m quiet',
+'I love you, baby, I promise',
+'And I hope I never see what your face looks like goin\'',
+'A face, I swear, that I could spend my whole life knowin\''
   ],
-  song: 'what would you do?',
-  artist: 'Tate McRae',
-  album: 'i used to think i could fly',
+  song: 'honeybee',
+  artist: 'Olivia Rodrigo',
+  album: 'you seem pretty sad for a girl so in love',
 };
 // ====================================================================
 
