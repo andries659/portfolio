@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 // ===== Update this whenever you want to change the weekly lyric =====
 const LYRIC = {
   lines: [
-    'I won\'t let you forget how I feel'
-    'Come slip into something real'
-    'And you\'ll never get over me'
-    'Then somehow every ex (ex), disappears, oh'
-    'The vision is crystal clear'
+    'I won\'t let you forget how I feel',
+    'Come slip into something real',
+    'And you\'ll never get over me',
+    'Then somehow every ex (ex), disappears, oh',
+    'The vision is crystal clear',
     'No, you\'ll never get over me, yeah-yeah'
   ],
   song: 'never get over me',
