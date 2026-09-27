@@ -3,15 +3,16 @@ import React, { useEffect, useState } from 'react';
 // ===== Update this whenever you want to change the weekly lyric =====
 const LYRIC = {
   lines: [
-    'And it\'s too hard to describe this',
-'In a way that feels honest, but even when I\'m quiet',
-'I love you, baby, I promise',
-'And I hope I never see what your face looks like goin\'',
-'A face, I swear, that I could spend my whole life knowin\''
+    'I won\'t let you forget how I feel'
+    'Come slip into something real'
+    'And you\'ll never get over me'
+    'Then somehow every ex (ex), disappears, oh'
+    'The vision is crystal clear'
+    'No, you\'ll never get over me, yeah-yeah'
   ],
-  song: 'honeybee',
-  artist: 'Olivia Rodrigo',
-  album: 'you seem pretty sad for a girl so in love',
+  song: 'never get over me',
+  artist: 'Ariana Grande',
+  album: 'petal',
 };
 // ====================================================================
 
