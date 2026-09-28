@@ -710,6 +710,407 @@ const styles = `
     gap: 0.6rem;
   }
 }
+
+.github-activity {
+  position: relative;
+  overflow: hidden;
+
+  margin-bottom: 3rem;
+  padding: 1.5rem;
+
+  background: rgba(5, 20, 12, 0.72);
+
+  border:
+    1px solid
+    rgba(61, 255, 160, 0.14);
+
+  border-radius: 5px;
+}
+
+.github-activity::before {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      rgba(61, 255, 160, 0.035) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(61, 255, 160, 0.035) 1px,
+      transparent 1px
+    );
+
+  background-size: 24px 24px;
+
+  mask-image:
+    radial-gradient(
+      ellipse at center,
+      black 10%,
+      transparent 75%
+    );
+}
+
+.github-activity-heading {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  margin-bottom: 1.5rem;
+}
+
+.github-activity-label {
+  display: block;
+
+  margin-bottom: 0.45rem;
+
+  color: #3a7a5a;
+
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+
+  letter-spacing: 0.25em;
+}
+
+.github-activity-heading h3 {
+  margin: 0;
+
+  color: #e8fff2;
+
+  font-family: 'Syne', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.github-activity-heading p {
+  margin: 0.4rem 0 0;
+
+  color: #4e936e;
+
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+}
+
+.github-activity-link {
+  display: flex;
+  align-items: center;
+
+  gap: 0.45rem;
+
+  padding: 0.5rem 0.7rem;
+
+  color: #3dffa0;
+
+  border:
+    1px solid
+    rgba(61, 255, 160, 0.2);
+
+  background:
+    rgba(61, 255, 160, 0.04);
+
+  border-radius: 3px;
+
+  font-family: 'Space Mono', monospace;
+  font-size: 0.62rem;
+
+  text-decoration: none;
+
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    transform 0.2s;
+}
+
+.github-activity-link:hover {
+  border-color: #3dffa0;
+  background: rgba(61, 255, 160, 0.1);
+  transform: translateY(-2px);
+}
+
+.github-heatmap-wrapper {
+  position: relative;
+  z-index: 1;
+
+  overflow-x: auto;
+
+  padding-bottom: 0.5rem;
+}
+
+.github-months {
+  display: grid;
+
+  grid-template-columns:
+    repeat(12, minmax(35px, 1fr));
+
+  min-width: 760px;
+
+  margin-left: 2.6rem;
+  margin-bottom: 0.4rem;
+
+  color: #3a7a5a;
+
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+
+  text-align: center;
+}
+
+.github-heatmap {
+  display: flex;
+
+  min-width: 760px;
+}
+
+.github-weekdays {
+  width: 2.3rem;
+
+  flex-shrink: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-around;
+
+  padding: 0.05rem 0;
+
+  color: #3a7a5a;
+
+  font-family: 'Space Mono', monospace;
+  font-size: 0.5rem;
+}
+
+.github-weekdays span {
+  height: 11px;
+
+  display: flex;
+  align-items: center;
+}
+
+.github-weeks {
+  display: flex;
+
+  gap: 3px;
+
+  flex: 1;
+}
+
+.github-week {
+  display: grid;
+
+  grid-template-rows:
+    repeat(7, 11px);
+
+  gap: 3px;
+
+  flex: 1;
+}
+
+.github-day {
+  width: 100%;
+  min-width: 8px;
+
+  border-radius: 2px;
+
+  border:
+    1px solid
+    rgba(61, 255, 160, 0.04);
+
+  transition:
+    transform 0.12s,
+    box-shadow 0.12s;
+}
+
+.github-day:hover {
+  transform: scale(1.35);
+
+  position: relative;
+  z-index: 5;
+
+  box-shadow:
+    0 0 12px
+    rgba(61, 255, 160, 0.7);
+}
+
+.github-day.level-0 {
+  background:
+    rgba(61, 255, 160, 0.045);
+}
+
+.github-day.level-1 {
+  background:
+    rgba(61, 255, 160, 0.18);
+}
+
+.github-day.level-2 {
+  background:
+    rgba(61, 255, 160, 0.35);
+}
+
+.github-day.level-3 {
+  background:
+    rgba(61, 255, 160, 0.6);
+
+  box-shadow:
+    0 0 4px
+    rgba(61, 255, 160, 0.12);
+}
+
+.github-day.level-4 {
+  background:
+    #3dffa0;
+
+  box-shadow:
+    0 0 7px
+    rgba(61, 255, 160, 0.3);
+}
+
+.github-heatmap-footer {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  min-width: 760px;
+
+  margin-top: 0.7rem;
+  margin-left: 2.6rem;
+
+  color: #3a7a5a;
+
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+}
+
+.github-legend {
+  display: flex;
+  align-items: center;
+
+  gap: 0.25rem;
+}
+
+.github-legend i {
+  width: 10px;
+  height: 10px;
+
+  display: block;
+
+  border-radius: 2px;
+}
+
+.github-legend .level-0 {
+  background: rgba(61, 255, 160, 0.045);
+}
+
+.github-legend .level-1 {
+  background: rgba(61, 255, 160, 0.18);
+}
+
+.github-legend .level-2 {
+  background: rgba(61, 255, 160, 0.35);
+}
+
+.github-legend .level-3 {
+  background: rgba(61, 255, 160, 0.6);
+}
+
+.github-legend .level-4 {
+  background: #3dffa0;
+}
+
+.github-activity-note {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  margin-top: 1rem;
+
+  color: #3a7a5a;
+
+  font-family: 'Space Mono', monospace;
+  font-size: 0.55rem;
+}
+
+.github-activity-note > span:first-child {
+  color: #3dffa0;
+  font-size: 0.45rem;
+}
+
+.github-api-limit {
+  margin-left: auto;
+  color: #315c45;
+}
+
+.github-activity-loading,
+.github-activity-error {
+  position: relative;
+  z-index: 1;
+
+  min-height: 120px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #4e936e;
+
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+}
+
+.github-activity-error {
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.github-activity-error p {
+  margin: 0;
+}
+
+.github-activity-error a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  padding: 0.45rem 0.7rem;
+
+  color: #3dffa0;
+
+  border:
+    1px solid
+    rgba(61, 255, 160, 0.2);
+
+  text-decoration: none;
+
+  font-family: 'Space Mono', monospace;
+  font-size: 0.6rem;
+}
+
+@media (max-width: 650px) {
+  .github-activity {
+    padding: 1rem;
+  }
+
+  .github-activity-heading {
+    flex-direction: column;
+  }
+
+  .github-activity-link {
+    align-self: flex-start;
+  }
+}
 `;
 
 export default function Portfolio() {
