@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 // ===== Update this whenever you want to change the weekly lyric =====
 const LYRIC = {
   lines: [
-    'I won\'t let you forget how I feel',
-    'Come slip into something real',
-    'And you\'ll never get over me',
-    'Then somehow every ex (ex), disappears, oh',
-    'The vision is crystal clear',
-    'No, you\'ll never get over me, yeah-yeah'
+    'i won\'t let you forget how i feel',
+    'come slip into something real',
+    'and you\'ll never get over me',
+    'then somehow every ex, disappears, oh',
+    'the vision is crystal clear',
+    'no, you\'ll never get over me'
   ],
   song: 'never get over me',
   artist: 'Ariana Grande',
@@ -29,7 +29,7 @@ export default function WeeklyLyric() {
 
   return (
     <div className="weekly-lyric-block">
-      <p className="weekly-lyric-label">// Weekly Lyric</p>
+      <p className="weekly-lyric-label">// Favorite Lyrics</p>
 
       <div className="weekly-lyric-lines">
         {LYRIC.lines.map((line, i) => (
