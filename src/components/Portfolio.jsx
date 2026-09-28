@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import GitHubStats from './GitHubStats';
+import GitHubActivity from './GitHubActivity';
 import { motion, useScroll } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -773,6 +774,7 @@ export default function Portfolio() {
       <div className="portfolio-wrapper">
 		  
 		  <GitHubStats />
+		  <GitHubActivity />
 		  
         {/* Search */}
         <div className="search-wrap">
