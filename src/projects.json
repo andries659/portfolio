@@ -12,7 +12,7 @@
     "title": "Among Us QoL Mod",
     "description": "An Among Us mod with custom qaulity of life features made to improve the game.",
 	"relation": "Owner",
-    "github": "",
+    "github": "https://github.com/andries659/AmongQOL",
     "download": "",
     "type": "mod",
     "tags": ["Among Us", "Mod", "C#", "Game"]
@@ -44,7 +44,7 @@
   {
 	"title": "Town Of Host: Optimized (TOHO)",
 	"description": "TOHO is a Host-Only among us mod with hundreds of new roles, multiple Game Modes, and many game optimizations!",
-	"relation": "Associate",
+	"relation": "Head Of Development",
 	"link": "https://github.com/Limeau/TownofHost-Optimized",
 	"type": "mod",
 	"tags": ["Among Us", "Mod", "C#", "Game"]
