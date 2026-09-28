@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 // ===== Update this whenever you want to change the weekly lyric =====
 const LYRIC = {
   lines: [
-    'i won\'t let you forget how i feel',
+    'i wont let you forget how i feel',
     'come slip into something real',
     'and you\'ll never get over me',
     'then somehow every ex, disappears, oh',
