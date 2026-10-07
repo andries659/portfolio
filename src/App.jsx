@@ -172,7 +172,7 @@ function App() {
 
           <div className="header-time">My local time: {time}</div>
           <div className="relationship-status">
-            <span className="heart-icon">♥</span> Relationship Status: Taken
+            <span className="heart-icon">♥</span> Relationship Status: Taken (Private)
           </div>
 
           <button className="theme-toggle" onClick={cycleTheme}>
