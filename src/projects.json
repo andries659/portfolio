@@ -1,4 +1,13 @@
 [
+	{
+    "title": "Launchpad Revamped",
+    "description": "A fork from LaunchpadReloaded repurposed for my own mod, which was known as TOR-W:L back then.",
+	"relation": "Owner",
+    "github": "https://github.com/andries659/LaunchpadRevamped",
+    "link": "",
+    "type": "mod",
+    "tags": ["Among Us", "Mod", "Website", "Info", "TailwindCSS", "Next.js"]
+  },
   {
     "title": "TOHO Website",
     "description": "The official TOHO website regarding the entire mod.",
